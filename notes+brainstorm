@@ -1,0 +1,205 @@
+# my magnum opus i will never create anything better
+#### [[List of contractions I use often, for clarity.]]
+### Current Version: C-KJ-NF-001
+###### F-KJ-FN-001 when???
+# Version Meaning:
+#### C -- Concept (not real yet), A -- Alpha (real, barebones), B -- Beta (real, not polished), F -- Mostly/Completely Finished
+#### KJ -- (abbreviation of name, "Koji," also abbreviated from "Hideo ***Koji***ma")
+#### NF -- Not Finished, FN -- Finished 
+#### ### -- ###(st)(nd)(rd)(th) Version 
+**the exact version is identifiable by the highlighted characters ALONE:**
+X-**XX**-XX-**XXX**
+
+
+
+# Checklist:
+### User Needs/Wants (! = required, O = later, X = exclude)
+#### Audio/Sound
+- Basic Visual Output (!)
+- Display for data/stats (O)
+- Touchscreen (X)
+#### Video/Display
+- Basic SFX (O)
+- Speech Output (O)
+#### Input/Touch
+- Physical Buttons, On/Off, Brightness+/- (!?)
+- Basic Sound Detection (O)
+- Voice Commands (O)
+- Motion Detection (X)
+- Ambient Light Detection (F)
+- Morse Code Input? (F)
+#### Connectivity/Data
+- Wi-Fi (!)
+- Bluetooth (!)
+#### Power/Endurance
+- USB-Powered (!)
+- Battery-Powered, Using Power Bank (O)
+#### Aesthetics
+- Sleek/Minimalist Design (O)
+- Cute Design (!)
+- Modular (O)
+- Highly Durable (O)
+#### Expandability
+- Internal Space/Ports for extra sensors/controllers (!)
+#### Movement (X => O?)
+### Hardware Requirements and Costs:
+Cost in US$ (not including shipping) is ==highlighted.==
+#### Brain and Display - ==$36.50-61.50+== 
+##### [[ESP32-C6-DevKitM-1-N4 Development Board]] - ==$11.50==
+- This is the microcontroller. It's essential for Wi-Fi, Bluetooth, processing sensor data, and controlling the display/[[peripherals]].
+##### Screen - ==$25-50+==
+- See: [[Koji's Screen]]
+- This will be the robot's "face" and display for data/stats. It should be non-touch (low budget). It's necessary to confirm the exact driver chip to ensure compatibility with ESP32 libraries.
+
+**NOTE: The screen is the largest individual chunk of the cost. I can see if I can find a different way to use a screen, such as using an old one(?), buying a used screen, or buying secondhand.**
+#### Power Management - ==$0==
+##### USB-C 5V Adapter (or micro-USB, depending on ESP32 board) - ==$0==
+- For primary power. **MUST-HAVE**
+##### power bank that my parents will probably let me use idk - ==$0?==
+- hope and pray....
+#### Audio Output - ==$0==
+- The Zealot speaker I currently have, I don't necessarily need to buy an extra speaker.
+- A short 3.5mm jack for audio output to aforementioned speaker.
+#### Connectivity - ==$33-90==
+##### Dupont Jumper Wires (m/f, f/f, m/m assortment) - ==$5-10==
+- Definitely necessary for connecting components.
+##### Small Breadboard (necessary for testing circuits) - ==$2-5==
+See: [[Breadboard]].
+##### Solder (a small spool will last a while) - ==$5-15==
+- everything needs solder......
+##### Male/Female Headers - ==$5-10==
+- For soldering onto custom [[PCB]]s or [[perfboards]]. 
+##### SD Card (Probs got some laying around. If not, I can use the one in my GoPro.) - ==$0-10==
+Just in case I need to store information/log errors.
+##### Heat Shrink Tubing (electrical tape ONLY if absolutely necessary) - ==$8-20==
+- Insulates wires so I don't get electrocuted....
+##### M2/M3 Screws and Nuts assortment - ==$8-20==
+- For mounting stuff inside the hull so my machine isn't a maraca >,,<
+#### Input and Sensing - ==$9-20==
+##### ~8 Tactile Buttons - ==$5-10==
+- For:
+	- Brightness+/-,
+	- On/Off,
+	- Microphone Module (KY-038 or similar MAX9184 based module).
+- I don't need 8, but extras are always good.
+##### KY-038 Microphone Module (or similar) - ==$2-5==
+- Small, common module used for sound detection.
+##### (OPTIONAL) BH1750FVI Digital Light Sensor Module - ==$2-5==
+- For light intensity detection.
+
+*note: AliExpress will probably be my primary source for specific modules, but I should also use Amazon U.S. as a backup. I'll search for "ESP32," "4.3 inch SPI TFT LCD," "PAM8403," "SG90 Servo," "BH1750," "KY-038," and "Tactile Buttons." Bundled starter kits can also be a good way to get basic components.)*
+#### ==Total Cost: $72-175==
+### Software Requirements
+#### Core System Requirements
+##### Arduino C++.[^1]
+- Using the [[ESP-IDF framework]] via [[Arduino Core]].
+##### Define power states (Active, LowPower/Sleep, Off)
+
+##### Code should be organized into logical, reusable modules to keep it clean/maintainable.
+- For example: `DisplayManager`, `InputManager`, `SoundManager`, etc.
+#### Display Management
+##### Functionality
+###### Display various "face" expressions.
+- happy
+- neutral
+- confused
+- bored
+- asleep
+- reacting to sound/light
+###### Show current time.
+- ...why are you looking at the description? it's in the name.
+###### Display basic information/stats
+- Wi-Fi status
+- Battery level
+- Sensor readings
+###### Display short text messages or prompts.
+- on startup: "Hello, {CusUN}!"
+- on exit: "Goodbye, {CusUN}!"
+###### Basic animations for speech/idle
+##### Design Considerations
+###### Core expressions.
+as said before,
+- happy
+- neutral
+- confused
+- bored
+- asleep
+- reacting to sound/light
+Use `enum` for `ExpressionState`
+###### Transitions between screens/faces should be instant unless I feel snazzy.
+###### 3 Brightness levels.
+- 100%
+- 65%
+- 20%
+###### Fonts & Sizes
+- Liberation Mono 12, 18, 24
+- Comfortaa 18, 24
+- Lexend 48
+#### Input Management
+##### Functionality
+###### On/Off Button
+- Toggles the main power state (from `Active` to `LowPower`).
+###### Brightness +/-
+- Adjusts display brightness.
+###### "Interaction" Button.
+- 
+##### Design Considerations
+###### Debouncing
+- Preventing one button press from being read twice.
+###### Press Types
+- Short/Long
+- Single/Double
+###### LED Feedback?
+- On any button press, have an LED indicator showing if the button works.
+#### Connectivity Management
+##### Functionality
+###### Connect to a pre-configured Wi-Fi Network 
+##### Design Considerations
+
+#### Sensor Integration
+##### Functionality
+
+##### Design Considerations
+
+#### Actuator Control (Not needed as of C-KJ-NF-001)
+##### Functionality
+
+##### Design Considerations
+
+#### Audio Output.
+##### Functionality
+
+##### Design Considerations
+
+### Design Brainstorming
+
+### Addendum/Things That Come To Mind While Designing
+##### Have it be able to be controlled with [[Wooting UwU]]?
+##### That would be cool i think :3
+# DO NOT proceed if CAD Modeling is NF.
+
+[^1]: Definitely my biggest hurdle.
+ ```
+```                                                               _____nnnxxxxxxxxx             
+                                                            __xx/                xxx___       
+                                                        x_xx/                         x__     
+                  ___xxxnnn____x                      x_/                                x\   
+             __xxx              \=__x   ___-------__x_/                                   x|  
+         _xxx                       \\x-           //---                                   x\ 
+      xxx/                        --- \          xx/   \-                         x===x     x\
+    xx/                         _/_ ___          /    -  --                      /    |      |
+  nx/                          /__xx____           /-_-_-\_\-                   |   xxx     x|
+ n/                           |xxx xxxxx\\       /_xxxxxxx\_\                   |x         xx 
+n/   /==\\                    =      MMMMM\\    /xx       MMM=|                  \\x    =xxx  
+|   /\   x\                  x     MMMMMMMMM\  /xx       MMMMM|                    \==xx/     
+|   \nxx  x                  x    MMMMMMMMMM| \/x       MMMMMMMx                              
+x\   \n   x                  x    MMMMMMMMMM| ||x      MMMMMMMMx                              
+ x\\    nn/                  x   MMMMMMMMMMM| \|x      MMMMMMMMx                              
+   =xx==/                    xx  MMMMMMMMMMM_ ||x      MMMMMMMMx                              
+                             \=x MMMMMMMMMM|   \|x     MMMMMMMxx                              
+                              \=  MMMMMM ||    |\xxx    MMMMMxx                               
+                               \=x     xx--     |\| xxxxxMMMxx                         me btw       
+                                 \=nn+|-- _______ /\|----nn/                                  
+                                  \xx--   |XX|         xx/                                    
+                                     \__  |XX|     ___/                                       
+                                        \-________-                                           
