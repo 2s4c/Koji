@@ -5,3 +5,5 @@ definitely bad and unoptimized.
 im still learning im sorry
 \>,,<
 love u <3
+...............................
+ notes+brainstorm is the stuff i have on my obsidian text file. there will be hyperlinks that don't work. :3
